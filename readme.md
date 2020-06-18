@@ -7,11 +7,13 @@ A full description of this model can be found in its original publication [Peter
 
 The core model is implemented in `flashOERModel.py`, providing three main functions: 
 
-- oxygenCurve, which provides the level of oxygen during radiation exposures;
-- cumulativeOER, which calculates the average OER of an exposure incorporating oxygen depletion by radiation; and
-- predictSurvival, which calculates the predicted survival level for a given set of LQ parameters and radiation exposure.
+- `oxygenCurve`, which provides the level of oxygen during radiation exposures;
+- `cumulativeOER`, which calculates the average OER of an exposure incorporating oxygen depletion by radiation; and
+- `predictSurvival`, which calculates the predicted survival level for a given set of LQ parameters and radiation exposure.
 
 In addition to standard radiobiological parameters alpha, beta and the mid-point oxygen concentration of the OER curve (`REFOERCenter`) there are two other parameters, the oxygen depletion rate and the oxygen recovery rate. Reference parameters used in the model publication are stored in the main model file (`REFoxDep` and `REFoxRec` respectively), or alternative values can be passed into functions to explore their impact.
+
+Note that in `predictSurvival`, the normoxic alpha and beta parameters should be provided, and these will be scaled to reflect both the base oxygen level and any depletion which occurs during irradiation.
 
 An illustrative file showing how these different models can be used is also provided, showing the use of each of these functions (`flashAnalysis.py`).
 

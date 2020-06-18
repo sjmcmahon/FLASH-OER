@@ -125,6 +125,8 @@ def cumulativeOER(dose, doseRate, O2Mean, oxDepletion=REFoxDep, oxRecovery=REFox
 
 # Calculate log survival for a given set of conditions
 # Exposures is a list of [dose, doseRate, O2] sub-lists
+# Normoxic alpha and beta parameters should be applied, which will be corrected for both base
+# oxygen level and any depletion during irradiation.
 def predictSurvival(exposures, alpha, beta, oxDep = REFoxDep, oxRec = REFoxDep, 
 					OERCentre = REFOERCenter):
 	retVals = []
