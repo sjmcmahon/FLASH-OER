@@ -127,7 +127,37 @@ def survivalPlot():
 	plt.tight_layout()
 	plt.show()
 
+# Plot of survivals as a function of dose rates
+def doseRateSurvivalPlot():
+	doses = [x for x in np.arange(0,25,0.1)]
+	o2Level = 0.016
+	o2Label = str(o2Level*100)+"% O2"
+	doseRates = [0.1, 1, 10, 100, 1000, 1E10]
+	doseLabels = [str(dr)+" Gy/s" for dr in doseRates]
+
+	alpha = 0.12
+	beta = 0.027
+
+	fig = plt.figure(figsize=(5,4))
+	ax = plt.gca()
+	for n,dr in enumerate(doseRates):
+		exposures = [[d,dr,o2Level] for d in doses]
+		survs = predictSurvival(exposures, alpha, beta)
+		label = o2Label+", "+doseLabels[n]
+		ax.plot(doses, survs, label=label)
+
+	ax.set_yscale('log')
+	ax.set_xlabel("Dose (Gy)")
+	ax.set_ylabel("Surviving Fraction")
+	ax.set_ylim([8E-5,1])
+	ax.set_xlim([0,24])
+	ax.legend()
+
+	plt.tight_layout()
+	plt.show()
+
 if __name__ == "__main__":
 	oxygenDepletion()
 	meanOERCurve()
 	survivalPlot()
+	doseRateSurvivalPlot()
