@@ -63,7 +63,7 @@ def oxygenCurve(t, doseRate, O2Mean, oxDepletion=REFoxDep, oxRecovery=REFoxRec):
 	t=np.array(t)
 	if linearModel:
 		estO2 = O2Mean + doseRate*oxDepletion/oxRecovery*(np.exp(-oxRecovery*t)-1)
-		return max(0,estO2)
+		return np.clip(estO2,0,None)
 
 	return ((O2Mean/(doseRate*oxDepletion+oxRecovery)) * 
     	    (doseRate*oxDepletion*np.exp(-(doseRate*oxDepletion+oxRecovery)*t)+oxRecovery) )
